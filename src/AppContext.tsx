@@ -1,5 +1,10 @@
 import {createContext, MouseEvent} from 'react';
 
+export interface IAppContext {
+	theme: Theme;
+	onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
 export enum Theme {
 	LIGHT = "light",
 	DARK = "dark"

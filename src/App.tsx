@@ -1,13 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import Button from './Button';
-import {AppContextProvider, Theme} from './AppContext';
-import {MouseEvent} from 'react';
-
-export interface IAppContext {
-	theme: Theme;
-	onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+import {AppContextProvider, IAppContext, Theme} from './AppContext';
 
 class App extends React.Component<object, IAppContext> {
 
