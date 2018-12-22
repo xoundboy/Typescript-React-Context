@@ -5,11 +5,6 @@ export enum Theme {
 	DARK = "dark"
 }
 
-export interface IAppContext {
-	theme: Theme;
-	onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-}
-
 const defaultContext = {
 	theme: Theme.LIGHT,
 	onClick: (event: MouseEvent<HTMLButtonElement>) => {

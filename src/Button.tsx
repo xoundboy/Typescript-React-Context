@@ -6,20 +6,20 @@ enum Label {
 	DARK = "Switch for LIGHT theme"
 }
 
-const DARK_STYLE = {
-	color: "white",
-	background: "black"
-};
-
-const LIGHT_STYLE = {
-	color: "black",
-	background: "white"
-};
-
 class Button extends React.Component {
 
+	private static DARK_STYLE = {
+		color: "white",
+		background: "black"
+	};
+
+	private static LIGHT_STYLE = {
+		color: "black",
+		background: "white"
+	};
+
 	private static getStyleByTheme (theme: Theme) {
-		return theme === Theme.LIGHT ? LIGHT_STYLE : DARK_STYLE;
+		return theme === Theme.LIGHT ? Button.LIGHT_STYLE : Button.DARK_STYLE;
 	}
 
 	public render() {
