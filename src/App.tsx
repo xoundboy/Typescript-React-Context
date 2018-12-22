@@ -1,10 +1,10 @@
 import * as React from 'react';
 import './App.css';
 import Button from './Button';
-import {ThemeProvider, IThemeContext, Theme} from './ThemeContext';
+import {AppContextProvider, IAppContext, Theme} from './AppContext';
 
 interface IAppState {
-	themeContext: IThemeContext;
+	context: IAppContext;
 }
 
 class App extends React.Component<object, IAppState> {
@@ -12,9 +12,8 @@ class App extends React.Component<object, IAppState> {
 	constructor (props: object) {
 		super(props);
 		this.state = {
-			themeContext: {
+			context: {
 				theme: Theme.LIGHT,
-				buttonLabel: "Click for dark theme",
 				onClick: this.toggleTheme.bind(this)
 			}
 		}
@@ -22,23 +21,18 @@ class App extends React.Component<object, IAppState> {
 
 	public render() {
 		return (
-			<ThemeProvider value={this.state.themeContext}>
+			<AppContextProvider value={this.state.context}>
 				<div className="App">
 					<Button />
 				</div>
-			</ThemeProvider>
+			</AppContextProvider>
 		);
 	}
 
 	private toggleTheme(){
-		console.log("toggling theme");
-		const newThemeContext = Object.assign({}, this.state.themeContext);
-		const newTheme = (this.state.themeContext.theme === Theme.LIGHT) ? Theme.DARK : Theme.LIGHT;
-		const newButtonLabel = (this.state.themeContext.theme === Theme.LIGHT) ?
-			"Click for dark theme" : "Click for light theme";
-		newThemeContext.theme = newTheme;
-		newThemeContext.buttonLabel = newButtonLabel;
-		this.setState({themeContext: newThemeContext});
+		const newThemeContext = Object.assign({}, this.state.context);
+		newThemeContext.theme = (this.state.context.theme === Theme.LIGHT) ? Theme.DARK : Theme.LIGHT;
+		this.setState({context: newThemeContext});
 	}
 }
 

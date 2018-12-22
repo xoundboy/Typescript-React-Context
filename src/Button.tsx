@@ -1,32 +1,42 @@
 import * as React from 'react';
-import {Theme, ThemeConsumer} from './ThemeContext';
+import { AppContextConsumer, Theme } from './AppContext';
 
-const DARK_BUTTON = {
+enum Label {
+	LIGHT = "Switch for DARK theme",
+	DARK = "Switch for LIGHT theme"
+}
+
+const DARK_STYLE = {
 	color: "white",
 	background: "black"
 };
 
-const LIGHT_BUTTON = {
+const LIGHT_STYLE = {
 	color: "black",
 	background: "white"
 };
 
 class Button extends React.Component {
 
+	private static getStyleByTheme (theme: Theme) {
+		return theme === Theme.LIGHT ? LIGHT_STYLE : DARK_STYLE;
+	}
+
 	public render() {
 		return (
-			<ThemeConsumer>
+			<AppContextConsumer>
 				{
-					themeContext => {
-						const style = themeContext.theme === Theme.LIGHT ? DARK_BUTTON : LIGHT_BUTTON;
+					context => {
+						const style = Button.getStyleByTheme(context.theme);
+						const label = (context.theme === Theme.LIGHT) ? Label.LIGHT : Label.DARK;
 						return (
-							<button onClick={themeContext.onClick} style={style}>
-								{themeContext.buttonLabel}
+							<button onClick={context.onClick} style={style}>
+								{label}
 							</button>
 						)
 					}
 				}
-			</ThemeConsumer>
+			</AppContextConsumer>
 		);
 	}
 }
