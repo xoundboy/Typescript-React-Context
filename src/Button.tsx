@@ -26,7 +26,7 @@ class Button extends React.Component {
 		return (
 			<AppContextConsumer>
 				{
-					context => {
+					(context) => {
 						const style = Button.getStyleByTheme(context.theme);
 						const label = (context.theme === Theme.LIGHT) ? Label.LIGHT : Label.DARK;
 						return (
